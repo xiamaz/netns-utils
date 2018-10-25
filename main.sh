@@ -28,6 +28,9 @@ enable_routing() {
 }
 
 case $1 in
+"")
+	echo "# <cmd> namespace_name"
+	;;
 *)
 	create_netns $1
 	create_interfaces $1
