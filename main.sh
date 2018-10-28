@@ -67,7 +67,7 @@ case "$1" in
 		enable_routing "$vethext" "$subnet"
 		;;
 	del)
-		if ip netns | grep "$2" > /dev/null; then
+		if ! ip netns | grep "$2" > /dev/null; then
 			echo "Cannot find given netns."
 			exit
 		fi
