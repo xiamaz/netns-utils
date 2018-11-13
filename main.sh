@@ -64,10 +64,16 @@ enable_routing() {
 		printerr "INPUT rule already exists for ${2}.0/24"
 	fi
 	if ! iptables -t nat -C POSTROUTING -s "${2}.0/24" -o wl+ -j MASQUERADE 2> /dev/null; then
-		printerr "POSTROUTING rule created for ${2}.0/24"
+		printerr "POSTROUTING rule created for ${2}.0/24 wl+"
 		iptables -t nat -A POSTROUTING -s "${2}.0/24" -o wl+ -j MASQUERADE
 	else
-		printerr "POSTROUTING rule already exists for ${2}.0/24"
+		printerr "POSTROUTING rule already exists for ${2}.0/24 wl+"
+	fi
+	if ! iptables -t nat -C POSTROUTING -s "${2}.0/24" -o en+ -j MASQUERADE 2> /dev/null; then
+		printerr "POSTROUTING rule created for ${2}.0/24 en+"
+		iptables -t nat -A POSTROUTING -s "${2}.0/24" -o en+ -j MASQUERADE
+	else
+		printerr "POSTROUTING rule already exists for ${2}.0/24 en+"
 	fi
 	sysctl -q net.ipv4.ip_forward=1
 }
