@@ -72,7 +72,7 @@ enable_routing() {
 	sysctl -q net.ipv4.ip_forward=1
 }
 
-if [ "$EUID" -ne 0 ]; then
+if [ $(id -u) -ne 0 ]; then
 	echo "Please run as root."
 	echo $usage
 	exit
